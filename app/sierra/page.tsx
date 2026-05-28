@@ -109,7 +109,15 @@ export default function SierraPage() {
         <p>
           Eight Zod-typed tools, in-memory τ-bench corpus per session, no
           real bookings, honest pass^1 scoring. Open-source companion repo
-          ships with the cold email.
+          at{' '}
+          <a
+            href="https://github.com/MaxHarar/sierra-tau-demo"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            github.com/MaxHarar/sierra-tau-demo
+          </a>
+          .
         </p>
         <p className="text-secondary text-sm">
           Day job: shipped a similar agent for medical demand packets at
