@@ -38,7 +38,7 @@ export default function SierraPage() {
         </div>
         <p className="text-secondary">
           A working customer-service agent for Sierra&apos;s own τ-bench
-          airline domain. Built in two weekends. Stack: Claude Sonnet 4.5,
+          airline domain. Built in two days. Stack: Claude Sonnet 4.5,
           Vercel AI SDK v6, Upstash, Next.js 16.
         </p>
         <p>

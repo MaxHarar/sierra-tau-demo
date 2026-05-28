@@ -4,7 +4,7 @@
 > **Live demo:** [maxharar.com/sierra](https://maxharar.com/sierra)
 > **Stack:** Claude Sonnet 4.5 · Vercel AI SDK v6 · Upstash · Next.js 16
 
-Shipped in two weekends. Honest pass^1, calibrated refusals, real τ-bench tool calls, no fake data.
+Shipped in two days. Honest pass^1, calibrated refusals, real τ-bench tool calls, no fake data.
 
 ---
 
@@ -217,7 +217,7 @@ Selected from τ-bench's 14 airline tools. Full Zod schemas in [`lib/sierra/tool
 
 ## What's measured vs not (v1.1 backlog)
 
-This demo is intentionally scoped for two weekends. Items here are real but deferred:
+This demo is intentionally scoped for two days. Items here are real but deferred:
 
 - **Full τ-bench-style multi-turn simulated-user eval.** Current eval uses a regex auto-confirmer; a proper simulated user (the Sierra harness pattern) would lift the change-flight chip without changing the agent.
 - **Real wiki.md resolution in `<PolicyChip />`.** Currently the side sheet shows a placeholder. Resolving `rule 3.2.1` to the actual paragraph in `wiki.md` is a small parser.
