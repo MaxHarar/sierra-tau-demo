@@ -10,7 +10,7 @@ let _wiki: string | null = null;
 
 export function getAirlineWiki(): string {
   if (_wiki === null) {
-    _wiki = readFileSync(join(process.cwd(), 'app/sierra/data/wiki.md'), 'utf-8');
+    _wiki = readFileSync(join(process.cwd(), 'app/sierra/data/policy.md'), 'utf-8');
   }
   return _wiki;
 }

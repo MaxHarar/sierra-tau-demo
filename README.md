@@ -1,6 +1,6 @@
 # Pass^1
 
-> A working customer-service agent built against [Sierra's open τ-bench airline domain](https://github.com/sierra-research/tau-bench).
+> A working customer-service agent built against [Sierra's open τ³-bench airline domain](https://github.com/sierra-research/tau2-bench) (v1.0.0).
 > **Live demo:** [maxharar.com/sierra](https://maxharar.com/sierra)
 > **Stack:** Claude Sonnet 4.5 · Vercel AI SDK v6 · Upstash · Next.js 16
 
@@ -12,7 +12,7 @@ Shipped in two days. Honest pass^1, calibrated refusals, real τ-bench tool call
 
 [Sierra](https://sierra.ai) (Bret Taylor's company) published **τ-bench** — an open agent-reliability benchmark with two domains: retail and **airline**. They named the reliability metric **pass^k**: the probability the agent passes *every* attempt across k i.i.d. trials. Customer-service agents get one shot per customer; "at least one of k" is not a meaningful business metric.
 
-This repo ships a single-page interactive agent against τ-bench's airline domain. The agent uses Sierra's policy doc (`wiki.md`) as its system prompt, the seeded τ-bench corpus as in-memory state, and Anthropic Claude Sonnet 4.5 for reasoning. Eight Zod-typed tools mirror the τ-bench airline action surface. Every chip in the demo is a representative task from one of five categories Sierra cares about.
+This repo ships a single-page interactive agent against τ³-bench's airline domain. The agent uses Sierra's policy doc (`policy.md`, was `wiki.md` in τ-bench v1) as its system prompt, the seeded corpus as in-memory state, and Anthropic Claude Sonnet 4.5 for reasoning. Eight Zod-typed tools mirror the airline action surface. Every chip in the demo is a representative task from one of five categories Sierra cares about.
 
 ### What this is NOT
 
@@ -86,7 +86,7 @@ Browser  ──POST /api/sierra/chat──▶  Next.js API route
 
 1. **Stateless-by-rehydration world.** Vercel serverless functions don't share process memory. The canonical world state is the message history `useChat()` ships on every POST. Mutating tool calls are replayed against a fresh corpus clone to reconstruct the current world deterministically. The in-process Map cache is a *perf* mechanism, not a correctness one.
 2. **Tools never throw.** Every `execute()` returns `{ error: '...' }` on invalid input so the model can self-correct.
-3. **Calibrated action over verbosity.** The agent's system prompt is Sierra's own `wiki.md`. Refusal-on-policy is rewarded, not refusal-by-default.
+3. **Calibrated action over verbosity.** The agent's system prompt is Sierra's own `policy.md`. Refusal-on-policy is rewarded, not refusal-by-default.
 4. **Honest numbers beat polished claims.** The page displays the real pass^1 from the eval, including the chips that score 0.
 5. **No new framework.** Vanilla Tailwind v4 + small components. No shadcn, no Framer Motion, no UI library.
 
@@ -156,13 +156,13 @@ pnpm tsx scripts/sierra-eval.ts --n 10 --out app/sierra/data/pass1.json --verbos
 │   ├── api/sierra/chat/route.ts    # POST handler — streamText, ratelimit, budget, Zod-validated
 │   ├── sierra/
 │   │   ├── data/
-│   │   │   ├── users.json          # τ-bench airline corpus (MIT) — 500 users
+│   │   │   ├── users.json          # τ³-bench airline corpus (MIT) — 500 users
 │   │   │   ├── flights.json        # 300 flights
 │   │   │   ├── reservations.json   # 2000 reservations
-│   │   │   ├── wiki.md             # τ-airline policy doc — becomes the system prompt
+│   │   │   ├── policy.md           # τ-airline policy doc — becomes the system prompt
 │   │   │   ├── canonical-tasks.ts  # 5 task expectations with judge() functions
 │   │   │   ├── pass1.json          # eval output (committed; regen with pnpm eval)
-│   │   │   └── PROVENANCE.md       # τ-bench attribution + fetch date
+│   │   │   └── PROVENANCE.md       # τ³-bench attribution + fetch date
 │   │   └── page.tsx                # /sierra — server component
 │   ├── globals.css                 # design tokens + .sierra-workbench-fullbleed
 │   ├── layout.tsx                  # root shell
@@ -174,7 +174,7 @@ pnpm tsx scripts/sierra-eval.ts --n 10 --out app/sierra/data/pass1.json --verbos
 │   ├── TracePane.tsx               # tool-call timeline
 │   ├── ToolCallCard.tsx            # one tool invocation, 4 visual states
 │   ├── ChipRow.tsx                 # 5 example chips
-│   ├── PolicyChip.tsx              # rule-citation chip → side sheet (v1.1: real wiki.md resolution)
+│   ├── PolicyChip.tsx              # rule-citation chip → side sheet (v1.1: real policy.md resolution)
 │   ├── DiffCard.tsx                # itinerary diff (v1.1: wire into ChatPane on update_reservation_flights)
 │   └── BudgetBanner.tsx            # daily $ cap reached state
 ├── lib/sierra/
@@ -191,7 +191,7 @@ pnpm tsx scripts/sierra-eval.ts --n 10 --out app/sierra/data/pass1.json --verbos
 └── scripts/
     ├── sierra-eval.ts              # pass^1 eval CLI with multi-turn auto-confirm
     ├── smoke-sierra-scaffold.ts    # verify corpus + types + world load
-    └── sierra-import-tau.sh        # one-shot import from sierra-research/tau-bench
+    └── sierra-import-tau.sh        # one-shot import from sierra-research/tau2-bench
 ```
 
 ---
@@ -220,7 +220,7 @@ Selected from τ-bench's 14 airline tools. Full Zod schemas in [`lib/sierra/tool
 This demo is intentionally scoped for two days. Items here are real but deferred:
 
 - **Full τ-bench-style multi-turn simulated-user eval.** Current eval uses a regex auto-confirmer; a proper simulated user (the Sierra harness pattern) would lift the change-flight chip without changing the agent.
-- **Real wiki.md resolution in `<PolicyChip />`.** Currently the side sheet shows a placeholder. Resolving `rule 3.2.1` to the actual paragraph in `wiki.md` is a small parser.
+- **Real `policy.md` resolution in `<PolicyChip />`.** Currently the side sheet shows a placeholder. Resolving `rule 3.2.1` to the actual paragraph in `policy.md` is a small parser.
 - **Wire `<DiffCard />` into `<ChatPane />`** on `update_reservation_flights` flows so the before/after itinerary diff renders inline.
 - **Discriminated union for `WorldAction`** via Zod inference — eliminates the four `as unknown as` casts in the codebase.
 - **Replace `PartLike` cast in ChatPane** with AI SDK's `isToolUIPart` / `isTextUIPart` / `getToolName` exports.
@@ -233,7 +233,7 @@ This demo is intentionally scoped for two days. Items here are real but deferred
 
 ## Credits & license
 
-- **τ-bench data + policy** from [sierra-research/tau-bench](https://github.com/sierra-research/tau-bench), MIT-licensed. See [`app/sierra/data/PROVENANCE.md`](./app/sierra/data/PROVENANCE.md) for the pinned commit SHA + fetch date.
+- **τ³-bench v1.0.0 data + policy** from [sierra-research/tau2-bench](https://github.com/sierra-research/tau2-bench), MIT-licensed. See [`app/sierra/data/PROVENANCE.md`](./app/sierra/data/PROVENANCE.md) for the pinned commit SHA + fetch date + the rationale for migrating from the deprecated `tau-bench` repo.
 - **τ-bench paper:** Yao et al., *τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains*, [arXiv:2406.12045](https://arxiv.org/abs/2406.12045).
 - **pass^k formula:** see [Philipp Schmid's breakdown](https://www.philschmid.de/agents-pass-at-k-pass-power-k).
 - Companion site: [maxharar.com/sierra](https://maxharar.com/sierra) (deployed on Vercel).

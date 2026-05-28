@@ -1,5 +1,5 @@
 /**
- * Type definitions for the τ-airline corpus (sierra-research/tau-bench, MIT).
+ * Type definitions for the τ-airline corpus (sierra-research/tau2-bench, MIT).
  *
  * Shapes are documented in TDD-sierra.md § 3.1. Where the on-disk JSON
  * disagrees with the TDD prose, the comments below note the empirical
