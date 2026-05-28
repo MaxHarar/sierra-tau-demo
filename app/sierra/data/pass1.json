@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-28T01:36:02.406Z",
+  "generatedAt": "2026-05-28T03:42:24.510Z",
   "model": "claude-sonnet-4-5",
   "attemptsPerTask": 3,
-  "aggregate": 0.7333333333333333,
-  "totalCostUsd": 0.421803,
+  "aggregate": 0.8,
+  "totalCostUsd": 0.6977310000000001,
   "tasks": [
     {
       "id": "change_flight_to_lax",
@@ -17,45 +17,52 @@
           "pass": false,
           "reason": "no update_reservation_flights call (turns: 4)",
           "actions": [],
-          "inputTokens": 18775,
-          "outputTokens": 576,
-          "durationMs": 177968
+          "inputTokens": 84538,
+          "outputTokens": 849,
+          "durationMs": 140269
         },
         {
           "trial": 2,
           "pass": false,
           "reason": "no update_reservation_flights call (turns: 4)",
           "actions": [],
-          "inputTokens": 18914,
-          "outputTokens": 563,
-          "durationMs": 113717
+          "inputTokens": 21158,
+          "outputTokens": 729,
+          "durationMs": 171662
         },
         {
           "trial": 3,
           "pass": false,
           "reason": "no update_reservation_flights call (turns: 4)",
           "actions": [],
-          "inputTokens": 18805,
-          "outputTokens": 520,
-          "durationMs": 115029
+          "inputTokens": 20967,
+          "outputTokens": 592,
+          "durationMs": 113697
         }
       ]
     },
     {
       "id": "cancel_reservation_4wq150",
       "label": "Cancel my reservation",
-      "passes": 2,
+      "passes": 3,
       "trials": 3,
-      "pass1": 0.6666666666666666,
+      "pass1": 1,
       "perTrial": [
         {
           "trial": 1,
-          "pass": false,
-          "reason": "no cancel_reservation call",
-          "actions": [],
-          "inputTokens": 3914,
-          "outputTokens": 206,
-          "durationMs": 6691
+          "pass": true,
+          "reason": "cancel_reservation(4WQ150) (turns: 3)",
+          "actions": [
+            {
+              "name": "cancel_reservation",
+              "kwargs": {
+                "reservation_id": "4WQ150"
+              }
+            }
+          ],
+          "inputTokens": 12842,
+          "outputTokens": 435,
+          "durationMs": 76204
         },
         {
           "trial": 2,
@@ -69,9 +76,9 @@
               }
             }
           ],
-          "inputTokens": 11602,
-          "outputTokens": 477,
-          "durationMs": 74764
+          "inputTokens": 12961,
+          "outputTokens": 523,
+          "durationMs": 84557
         },
         {
           "trial": 3,
@@ -85,9 +92,9 @@
               }
             }
           ],
-          "inputTokens": 11652,
-          "outputTokens": 534,
-          "durationMs": 86442
+          "inputTokens": 12820,
+          "outputTokens": 433,
+          "durationMs": 78592
         }
       ]
     },
@@ -103,27 +110,27 @@
           "pass": true,
           "reason": "no mutating actions (refused)",
           "actions": [],
-          "inputTokens": 3628,
-          "outputTokens": 138,
-          "durationMs": 6506
+          "inputTokens": 4060,
+          "outputTokens": 104,
+          "durationMs": 5835
         },
         {
           "trial": 2,
           "pass": true,
           "reason": "no mutating actions (refused)",
           "actions": [],
-          "inputTokens": 3628,
-          "outputTokens": 148,
-          "durationMs": 6556
+          "inputTokens": 3714,
+          "outputTokens": 40,
+          "durationMs": 1855
         },
         {
           "trial": 3,
           "pass": true,
           "reason": "no mutating actions (refused)",
           "actions": [],
-          "inputTokens": 3624,
-          "outputTokens": 107,
-          "durationMs": 7677
+          "inputTokens": 4066,
+          "outputTokens": 130,
+          "durationMs": 10167
         }
       ]
     },
@@ -139,27 +146,27 @@
           "pass": true,
           "reason": "no mutating actions (read-only)",
           "actions": [],
-          "inputTokens": 4435,
-          "outputTokens": 169,
-          "durationMs": 10717
+          "inputTokens": 8147,
+          "outputTokens": 78,
+          "durationMs": 14021
         },
         {
           "trial": 2,
           "pass": true,
           "reason": "no mutating actions (read-only)",
           "actions": [],
-          "inputTokens": 4435,
-          "outputTokens": 188,
-          "durationMs": 13959
+          "inputTokens": 4930,
+          "outputTokens": 80,
+          "durationMs": 13522
         },
         {
           "trial": 3,
           "pass": true,
           "reason": "no mutating actions (read-only)",
           "actions": [],
-          "inputTokens": 4449,
-          "outputTokens": 136,
-          "durationMs": 13391
+          "inputTokens": 8147,
+          "outputTokens": 83,
+          "durationMs": 12027
         }
       ]
     },
@@ -175,27 +182,27 @@
           "pass": true,
           "reason": "no mutating actions (handled contradiction)",
           "actions": [],
-          "inputTokens": 3619,
-          "outputTokens": 206,
-          "durationMs": 8368
+          "inputTokens": 4059,
+          "outputTokens": 156,
+          "durationMs": 6116
         },
         {
           "trial": 2,
           "pass": true,
           "reason": "no mutating actions (handled contradiction)",
           "actions": [],
-          "inputTokens": 3626,
-          "outputTokens": 199,
-          "durationMs": 7263
+          "inputTokens": 3706,
+          "outputTokens": 51,
+          "durationMs": 2260
         },
         {
           "trial": 3,
           "pass": true,
           "reason": "no mutating actions (handled contradiction)",
           "actions": [],
-          "inputTokens": 3620,
-          "outputTokens": 208,
-          "durationMs": 8849
+          "inputTokens": 4057,
+          "outputTokens": 198,
+          "durationMs": 9366
         }
       ]
     }

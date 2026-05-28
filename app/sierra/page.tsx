@@ -93,14 +93,14 @@ export default function SierraPage() {
           policy mandates explicit user confirmation before any mutating
           tool call. Our eval uses a multi-turn loop (up to 4 turns per
           trial) with a regex-based auto-confirmer that recognises common
-          confirmation prompts and responds. The cancel chip lifts to 2/3
+          confirmation prompts and responds. The cancel chip passes 3/3
           this way. The change-flight chip stays at 0/3 because Mia
           Li&apos;s prompt is genuinely ambiguous about which of her three
           reservations to modify — a heuristic auto-confirmer can&apos;t
           pick a candidate the way a real user would. The three
           non-mutating chips (refusal, lookup, contradiction handling)
           score 1.000 each: the agent stays on-policy in every trial. A
-          full τ-bench-style simulated-user LLM that holds task intent
+          full τ³-bench-style simulated-user LLM that holds task intent
           across turns is the right next step (v1.1) — it would lift the
           change-flight chip without changing the agent.
         </p>
