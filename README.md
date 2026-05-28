@@ -258,8 +258,10 @@ The chip prompts are intentionally ambiguous in places. Mia Li's "change my rese
 
 ---
 
-## Why this exists
+## What's next
 
-The default move when applying for a job is a LinkedIn DM. The asymmetric move is to ship the thing they'd hire you to build, anchor it on their own published benchmark, and let the artifact open the door.
+τ-bench airline is one domain. The retail domain is the obvious next target — same harness, different policies, different tools. The v1.1 list above gets shipped one item at a time as the next agent project surfaces a need for it.
+
+The bigger takeaway, the one I'm carrying into the next build: the spec is the leverage, not the code. The Advisor saved this build before I wrote any agent code. That's where I'll spend more time on the next one.
 
 If you're working on agent reliability and this resonates, [say hi](mailto:max.harar@gmail.com).
