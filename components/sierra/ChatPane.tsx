@@ -19,7 +19,7 @@
  *  - composer is a real `<form>` so Enter submits and Shift+Enter newlines
  */
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { UIMessage } from 'ai';
 import { PolicyChip } from './PolicyChip';
 import { ToolCallCard, type ToolCallState } from './ToolCallCard';
@@ -151,6 +151,15 @@ export function ChatPane({ messages, onSubmit, status }: ChatPaneProps) {
   const canSubmit = status === 'ready' && value.trim().length > 0;
   const isStreaming = status === 'streaming' || status === 'submitted';
 
+  // Auto-scroll the log to the bottom whenever new content lands. Imperative
+  // DOM scroll, not setState — the react-hooks/set-state-in-effect rule does
+  // not apply. We deliberately depend on `messages` (whole array, not just
+  // length) so streamed text-delta updates also trigger the scroll.
+  useEffect(() => {
+    const el = logRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [messages, isStreaming]);
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!canSubmit) return;
@@ -171,13 +180,13 @@ export function ChatPane({ messages, onSubmit, status }: ChatPaneProps) {
   }
 
   return (
-    <div className="flex h-full min-h-[400px] flex-col gap-3">
+    <div className="flex h-[min(70vh,560px)] min-h-[400px] flex-col gap-3">
       <div
         ref={logRef}
         role="log"
         aria-live="polite"
         aria-atomic="false"
-        className="flex-1 space-y-3 overflow-y-auto rounded-md border border-border bg-background p-3"
+        className="min-h-0 flex-1 space-y-3 overflow-y-auto rounded-md border border-border bg-background p-3"
       >
         {messages.length === 0 && (
           <p className="text-xs italic text-tertiary">

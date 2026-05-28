@@ -67,7 +67,7 @@ export function Workbench() {
     [sessionId],
   );
 
-  const { messages, sendMessage, status, error } = useChat({ transport });
+  const { messages, sendMessage, setMessages, status, error } = useChat({ transport });
 
   const [tab, setTab] = useState<'itinerary' | 'trace'>('itinerary');
 
@@ -94,6 +94,9 @@ export function Workbench() {
 
   function handlePick(prompt: string) {
     if (status === 'streaming' || status === 'submitted') return;
+    // Each chip is a fresh demo trial — clear the prior conversation so the
+    // panel doesn't grow unbounded across chip switches.
+    setMessages([]);
     void sendMessage({ text: prompt });
   }
 
