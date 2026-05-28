@@ -242,6 +242,22 @@ This demo is intentionally scoped for two days. Items here are real but deferred
 
 ---
 
+## What I learned
+
+The most consequential decision in this build happened before I wrote any agent code. I drafted a TDD spec that stored per-session world state in an in-process `Map<sessionId, World>`. The Advisor flagged it in thirty seconds — Vercel serverless functions don't share process memory. Every multi-turn conversation would have silently lost state between requests. I rewrote the spec to derive world state by replaying mutating tool calls from the message history `useChat` already ships on every POST. The Map became an optional warm-Lambda cache, not a correctness mechanism. That single catch was worth more than the rest of the work.
+
+The agent's refusals were more impressive than its mutations. When a user asks to be bumped to first class for free, the demo-grade move is a polite decline. The agent does something better. It looks up the reservation, sees the cabin is already business, checks the policy, and explains the airline doesn't offer first class. No hallucination. No phantom apology. Just calibrated action.
+
+The eval kept me honest. The headline number is 0.733 across 5 tasks at n=3 — not great, not bad. Two of the chips score 0/3 not because the agent fails but because the policy requires explicit user confirmation before any mutating call, and my single-turn auto-confirm eval doesn't always reach the confirmation step. I could have tightened the chip prompts to lift the number. I left them ambiguous and documented the methodology limitation on the page. Honest 0.733 reads better than inflated 0.95.
+
+Test in prod, not dev. React Strict Mode in Next.js dev double-mounts components, which made my chat panel render the same tool call 14 times across two simultaneous POSTs. I spent thirty minutes debugging it as a real bug. `pnpm build && pnpm start` showed one tool call and one POST, exactly as designed. Strict Mode is a development affordance, not a production behavior. I should have triaged in prod first.
+
+Code-producing agents are interchangeable. The plan was to have Forge — GPT-5.4 via codex — write the agent loop. Forge's backend lost entitlement on my account after the first call. I switched to a Claude-family substitute for the rest of the work without rewriting the brief. The code came out the same. The prompt was the artifact, not the model behind it.
+
+The chip prompts are intentionally ambiguous in places. Mia Li's "change my reservation to fly into LAX" doesn't say which of her three reservations to modify. The natural agent behavior is to look up all three and ask. That's the demo. Watching the agent reason through ambiguity, refuse gracefully under policy pressure, and stay grounded in the corpus is the headline. Mutation is the easier task.
+
+---
+
 ## Why this exists
 
 The default move when applying for a job is a LinkedIn DM. The asymmetric move is to ship the thing they'd hire you to build, anchor it on their own published benchmark, and let the artifact open the door.
