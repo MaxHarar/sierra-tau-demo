@@ -1,0 +1,203 @@
+{
+  "generatedAt": "2026-05-28T01:36:02.406Z",
+  "model": "claude-sonnet-4-5",
+  "attemptsPerTask": 3,
+  "aggregate": 0.7333333333333333,
+  "totalCostUsd": 0.421803,
+  "tasks": [
+    {
+      "id": "change_flight_to_lax",
+      "label": "Change my flight to LAX",
+      "passes": 0,
+      "trials": 3,
+      "pass1": 0,
+      "perTrial": [
+        {
+          "trial": 1,
+          "pass": false,
+          "reason": "no update_reservation_flights call (turns: 4)",
+          "actions": [],
+          "inputTokens": 18775,
+          "outputTokens": 576,
+          "durationMs": 177968
+        },
+        {
+          "trial": 2,
+          "pass": false,
+          "reason": "no update_reservation_flights call (turns: 4)",
+          "actions": [],
+          "inputTokens": 18914,
+          "outputTokens": 563,
+          "durationMs": 113717
+        },
+        {
+          "trial": 3,
+          "pass": false,
+          "reason": "no update_reservation_flights call (turns: 4)",
+          "actions": [],
+          "inputTokens": 18805,
+          "outputTokens": 520,
+          "durationMs": 115029
+        }
+      ]
+    },
+    {
+      "id": "cancel_reservation_4wq150",
+      "label": "Cancel my reservation",
+      "passes": 2,
+      "trials": 3,
+      "pass1": 0.6666666666666666,
+      "perTrial": [
+        {
+          "trial": 1,
+          "pass": false,
+          "reason": "no cancel_reservation call",
+          "actions": [],
+          "inputTokens": 3914,
+          "outputTokens": 206,
+          "durationMs": 6691
+        },
+        {
+          "trial": 2,
+          "pass": true,
+          "reason": "cancel_reservation(4WQ150) (turns: 3)",
+          "actions": [
+            {
+              "name": "cancel_reservation",
+              "kwargs": {
+                "reservation_id": "4WQ150"
+              }
+            }
+          ],
+          "inputTokens": 11602,
+          "outputTokens": 477,
+          "durationMs": 74764
+        },
+        {
+          "trial": 3,
+          "pass": true,
+          "reason": "cancel_reservation(4WQ150) (turns: 3)",
+          "actions": [
+            {
+              "name": "cancel_reservation",
+              "kwargs": {
+                "reservation_id": "4WQ150"
+              }
+            }
+          ],
+          "inputTokens": 11652,
+          "outputTokens": 534,
+          "durationMs": 86442
+        }
+      ]
+    },
+    {
+      "id": "first_class_refusal",
+      "label": "Bump me to first class, free",
+      "passes": 3,
+      "trials": 3,
+      "pass1": 1,
+      "perTrial": [
+        {
+          "trial": 1,
+          "pass": true,
+          "reason": "no mutating actions (refused)",
+          "actions": [],
+          "inputTokens": 3628,
+          "outputTokens": 138,
+          "durationMs": 6506
+        },
+        {
+          "trial": 2,
+          "pass": true,
+          "reason": "no mutating actions (refused)",
+          "actions": [],
+          "inputTokens": 3628,
+          "outputTokens": 148,
+          "durationMs": 6556
+        },
+        {
+          "trial": 3,
+          "pass": true,
+          "reason": "no mutating actions (refused)",
+          "actions": [],
+          "inputTokens": 3624,
+          "outputTokens": 107,
+          "durationMs": 7677
+        }
+      ]
+    },
+    {
+      "id": "flight_status_lookup",
+      "label": "What's my flight status?",
+      "passes": 3,
+      "trials": 3,
+      "pass1": 1,
+      "perTrial": [
+        {
+          "trial": 1,
+          "pass": true,
+          "reason": "no mutating actions (read-only)",
+          "actions": [],
+          "inputTokens": 4435,
+          "outputTokens": 169,
+          "durationMs": 10717
+        },
+        {
+          "trial": 2,
+          "pass": true,
+          "reason": "no mutating actions (read-only)",
+          "actions": [],
+          "inputTokens": 4435,
+          "outputTokens": 188,
+          "durationMs": 13959
+        },
+        {
+          "trial": 3,
+          "pass": true,
+          "reason": "no mutating actions (read-only)",
+          "actions": [],
+          "inputTokens": 4449,
+          "outputTokens": 136,
+          "durationMs": 13391
+        }
+      ]
+    },
+    {
+      "id": "contradiction_handle",
+      "label": "Refund me but keep the seat",
+      "passes": 3,
+      "trials": 3,
+      "pass1": 1,
+      "perTrial": [
+        {
+          "trial": 1,
+          "pass": true,
+          "reason": "no mutating actions (handled contradiction)",
+          "actions": [],
+          "inputTokens": 3619,
+          "outputTokens": 206,
+          "durationMs": 8368
+        },
+        {
+          "trial": 2,
+          "pass": true,
+          "reason": "no mutating actions (handled contradiction)",
+          "actions": [],
+          "inputTokens": 3626,
+          "outputTokens": 199,
+          "durationMs": 7263
+        },
+        {
+          "trial": 3,
+          "pass": true,
+          "reason": "no mutating actions (handled contradiction)",
+          "actions": [],
+          "inputTokens": 3620,
+          "outputTokens": 208,
+          "durationMs": 8849
+        }
+      ]
+    }
+  ]
+}
