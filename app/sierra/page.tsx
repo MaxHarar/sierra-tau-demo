@@ -120,8 +120,8 @@ export default function SierraPage() {
           .
         </p>
         <p className="text-secondary text-sm">
-          Day job: shipped a similar agent for medical demand packets at
-          CURE — same kind of reliability problem, different domain.
+          Day job: shipped a similar agent for medical demand packets —
+          same kind of reliability problem, different domain.
         </p>
       </article>
     </>
